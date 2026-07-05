@@ -94,3 +94,24 @@ header{
 .whatsapp-btn:hover{
     background:#1DA851;
 }
+.detail-card{
+    max-width:600px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.detail-card img{
+    width:100%;
+    max-height:300px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.detail-card p{
+    text-align:left;
+    margin:6px 0;
+}
