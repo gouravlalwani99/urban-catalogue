@@ -79,8 +79,10 @@ function displayProducts(list) {
 
     productList.innerHTML += `
       <div class="card">
-        <img src="${imageUrl}" alt="${product["Product Name"] || "Product"}">
-        <h3>${product["Product Name"] || ""}</h3>
+        <a href="product.html?id=${product["Product ID"]}">
+          <img src="${imageUrl}" alt="${product["Product Name"] || "Product"}">
+          <h3>${product["Product Name"] || ""}</h3>
+        </a>
         <p><b>Company:</b> ${product["Company"] || ""}</p>
         <p><b>Category:</b> ${product["Category"] || ""}</p>
         <p><b>MRP:</b> ₹${product["MRP"] || ""}</p>
