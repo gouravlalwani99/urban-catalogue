@@ -2,6 +2,7 @@ const productList = document.getElementById("product-list");
 const searchInput = document.getElementById("searchInput");
 const categoryBar = document.getElementById("categoryBar");
 const companyBar = document.getElementById("companyBar");
+const loading = document.getElementById("loading");
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw4f8BkzgOt9pn6vBlupQxGQWNrtlEEYDB0PnZOxi0GXuuivBL9cTCUk5PCqxAnUGS0/exec";
 const WHATSAPP_NUMBER = "918349217679";
@@ -11,13 +12,20 @@ let activeCategory = "All";
 let activeCompany = "All";
 
 async function loadProducts() {
+  loading.style.display = "flex";
+  productList.style.display = "none";
+  
   try {
     const response = await fetch(API_URL);
     products = await response.json();
     renderCategoryButtons();
     renderCompanyButtons();
     displayProducts(products);
+    loading.style.display = "none";
+    productList.style.display = "grid";
   } catch (error) {
+    loading.style.display = "none";
+    productList.style.display = "grid";
     productList.innerHTML = "<p>Could not load products. Check your connection.</p>";
     console.error(error);
   }
