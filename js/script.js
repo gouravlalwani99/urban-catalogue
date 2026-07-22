@@ -35,8 +35,10 @@ function renderCategoryButtons() {
 
     btn.addEventListener("click", () => {
       activeCategory = category;
+      activeCompany = "All";
       applyFilters();
       renderCategoryButtons();
+      renderCompanyButtons();
     });
 
     categoryBar.appendChild(btn);
@@ -44,7 +46,13 @@ function renderCategoryButtons() {
 }
 
 function renderCompanyButtons() {
-  const companies = ["All", ...new Set(products.map(p => p["Company"]).filter(c => c && c.trim() !== ""))];
+  let filteredProducts = products;
+  
+  if (activeCategory !== "All") {
+    filteredProducts = products.filter(product => product["Category"] === activeCategory);
+  }
+  
+  const companies = ["All", ...new Set(filteredProducts.map(p => p["Company"]).filter(c => c && c.trim() !== ""))];
 
   companyBar.innerHTML = "";
 
