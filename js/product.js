@@ -2,6 +2,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyFDX-Sld5uXa3go-xFaA_w
 const WHATSAPP_NUMBER = "918349217679";
 
 const detailContainer = document.getElementById("product-detail");
+const loading = document.getElementById("loading");
 
 function getProductIdFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -10,6 +11,9 @@ function getProductIdFromURL() {
 
 async function loadProductDetail() {
   const productId = getProductIdFromURL();
+  
+  loading.style.display = "flex";
+  detailContainer.style.display = "none";
 
   try {
     const response = await fetch(API_URL);
@@ -18,6 +22,8 @@ async function loadProductDetail() {
     const product = products.find(p => String(p["Product ID"]) === String(productId));
 
     if (!product) {
+      loading.style.display = "none";
+      detailContainer.style.display = "block";
       detailContainer.innerHTML = "<p>Product not found.</p>";
       return;
     }
@@ -48,7 +54,12 @@ async function loadProductDetail() {
         <br><br>
         <a href="index.html">← Back to all products</a>
       </div>`;
+    
+    loading.style.display = "none";
+    detailContainer.style.display = "block";
   } catch (error) {
+    loading.style.display = "none";
+    detailContainer.style.display = "block";
     detailContainer.innerHTML = "<p>Could not load product details.</p>";
     console.error(error);
   }
